@@ -11,6 +11,14 @@ import router from '@adonisjs/core/services/router'
 
 router.get('/', async () => {
   return {
-    hello: 'world',
+    message: 'Hello from Adonis !',
   }
 })
+
+// auth.ts
+
+// inscription
+router.get('/register', 'AuthController.register')
+
+// connexion
+router.get('/login', 'AuthController.login')
