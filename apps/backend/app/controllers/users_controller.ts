@@ -12,7 +12,6 @@ export default class UsersController {
     return response.ok({
       id: user.id,
       email: user.email,
-      full_name: user.fullName,
       created_at: user.createdAt,
     })
   }
@@ -36,7 +35,6 @@ export default class UsersController {
     }
 
     // Mise à jour des autres champs
-    if (data.full_name) user.fullName = data.full_name
     if (data.email) user.email = data.email
 
     await user.save()
@@ -44,7 +42,6 @@ export default class UsersController {
     return response.ok({
       id: user.id,
       email: user.email,
-      full_name: user.fullName,
       created_at: user.createdAt,
     })
   }

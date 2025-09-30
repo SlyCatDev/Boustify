@@ -2,7 +2,6 @@ import vine from '@vinejs/vine'
 
 export const registerValidator = vine.compile(
   vine.object({
-    full_name: vine.string().minLength(3).maxLength(64),
     email: vine
       .string()
       .email()

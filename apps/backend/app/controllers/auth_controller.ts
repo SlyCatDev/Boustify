@@ -23,7 +23,6 @@ export default class AuthController {
         user: {
           id: user.id,
           email: user.email,
-          full_name: user.fullName,
         },
         type: 'bearer',
         token: token.value!.release(),

@@ -14,12 +14,6 @@ const AuthController = () => import('#controllers/auth_controller')
 const UsersController = () => import('#controllers/users_controller')
 const RecipesController = () => import('#controllers/recipes_controller')
 
-router.get('/', async () => {
-  return {
-    message: 'Hello from Adonis !',
-  }
-})
-
 /**
  * Routes d'authentification
  * ----------------------------------------
