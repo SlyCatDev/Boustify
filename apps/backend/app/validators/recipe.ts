@@ -14,14 +14,11 @@ export const createRecipeValidator = vine.compile(
         unit: vine.string().maxLength(20).optional(),
       })
     ),
-    instructions: vine.array(
-      vine.string().minLength(10)
-    ),
+    instructions: vine.array(vine.string().minLength(10)),
     prepTime: vine.number().positive(),
     cookTime: vine.number().positive(),
     servings: vine.number().positive(),
-    difficulty: vine.enum(['EASY', 'MEDIUM', 'HARD']),
-    category: vine.string().maxLength(50)
+    category: vine.string().maxLength(50),
   })
 )
 
@@ -32,7 +29,8 @@ export const updateRecipeValidator = vine.compile(
   vine.object({
     title: vine.string().minLength(3).maxLength(255).optional(),
     description: vine.string().optional(),
-    ingredients: vine.array(
+    ingredients: vine
+      .array(
         vine.object({
           name: vine.string().minLength(2).maxLength(100),
           quantity: vine.string().maxLength(50),
@@ -44,7 +42,6 @@ export const updateRecipeValidator = vine.compile(
     prepTime: vine.number().positive().optional(),
     cookTime: vine.number().positive().optional(),
     servings: vine.number().positive().optional(),
-    difficulty: vine.enum(['EASY', 'MEDIUM', 'HARD']).optional(),
     category: vine.string().maxLength(50).optional(),
   })
 )

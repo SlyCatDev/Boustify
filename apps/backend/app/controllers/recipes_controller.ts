@@ -6,19 +6,15 @@ export default class RecipesController {
   /**
    * Liste des recettes publiques
    */
-  async index({ request, response }: HttpContext) {
-    const page = request.input('page', 1)
-    const limit = request.input('limit', 10)
-
-    const recipes = await Recipe.query().orderBy('created_at', 'desc').paginate(page, limit)
-
+  public async index({ response }: HttpContext) {
+    const recipes = await Recipe.all()
     return response.ok(recipes)
   }
 
   /**
    * Détails d'une recette
    */
-  async show({ params, response }: HttpContext) {
+  public async show({ params, response }: HttpContext) {
     const recipe = await Recipe.findOrFail(params.id)
     return response.ok(recipe)
   }
@@ -26,7 +22,7 @@ export default class RecipesController {
   /**
    * Créer une nouvelle recette
    */
-  async store({ request, response, auth }: HttpContext) {
+  public async store({ request, response, auth }: HttpContext) {
     const data = await request.validateUsing(createRecipeValidator)
     const user = auth.getUserOrFail()
 

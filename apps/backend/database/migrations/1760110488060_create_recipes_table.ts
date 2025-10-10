@@ -7,13 +7,14 @@ export default class extends BaseSchema {
     this.schema.createTable(this.tableName, (table) => {
       table.increments('id')
       table.string('title').notNullable()
-      table.text('description').nullable()
+      table.text('description')
       table.text('ingredients').notNullable()
       table.text('instructions').notNullable()
-      table.integer('preparation_time').nullable() // in minutes
-      table.integer('cooking_time').nullable() // in minutes
-      table.integer('servings').nullable()
-      table.string('link').nullable()
+      table.integer('preparation_time')
+      table.boolean('is_vegetarian')
+      table.integer('cooking_time')
+      table.integer('servings')
+      table.string('link')
       table.integer('user_id').unsigned().references('id').inTable('users').onDelete('CASCADE')
 
       table.timestamp('created_at')

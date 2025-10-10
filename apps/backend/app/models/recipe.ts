@@ -23,6 +23,9 @@ export default class Recipe extends BaseModel {
   declare preparationTime: number | null
 
   @column()
+  declare isVegetarian: boolean | null
+
+  @column()
   declare cookingTime: number | null
 
   @column()
