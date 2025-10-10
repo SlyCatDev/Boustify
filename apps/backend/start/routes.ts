@@ -24,13 +24,15 @@ const RecipesController = () => import('#controllers/recipes_controller')
 router
   .group(() => {
     // Routes publiques
-    router.post('/register', [AuthController, 'register'])
-    router.post('/login', [AuthController, 'login'])
+    router.post('/auth/register', [AuthController, 'register'])
+    router.post('/auth/login', [AuthController, 'login'])
 
     // Routes protégées
-    router.post('/logout', [AuthController, 'logout']).use(middleware.auth({ guards: ['api'] }))
+    router
+      .post('/auth/logout', [AuthController, 'logout'])
+      .use(middleware.auth({ guards: ['api'] }))
   })
-  .prefix('/auth')
+  .prefix('/api')
 
 /**
  * Routes utilisateur
@@ -41,11 +43,11 @@ router
  */
 router
   .group(() => {
-    router.get('/profile', [UsersController, 'profile'])
+    router.get('/users/profile', [UsersController, 'profile'])
     // router.patch('/profile', [UsersController, 'update'])
     // router.delete('/profile', [UsersController, 'destroy'])
   })
-  .prefix('/users')
+  .prefix('/api')
   .use(middleware.auth({ guards: ['api'] }))
 
 /**
@@ -60,16 +62,16 @@ router
 router
   .group(() => {
     // Routes publiques
-    router.get('/', [RecipesController, 'index']) // Liste des recettes
-    router.get('/:id', [RecipesController, 'show']) // Détails d'une recette
+    router.get('/recipes', [RecipesController, 'index']) // Liste des recettes
+    router.get('/recipes/:id', [RecipesController, 'show']) // Détails d'une recette
 
     // Routes protégées (nécessitent une authentification)
     router
       .group(() => {
-        router.post('/', [RecipesController, 'store']) // Créer
+        router.post('/recipes', [RecipesController, 'store']) // Créer
         // router.patch('/:id', [RecipesController, 'update'])    // Modifier
         // router.delete('/:id', [RecipesController, 'destroy'])  // Supprimer
       })
       .use(middleware.auth({ guards: ['api'] }))
   })
-  .prefix('/recipes')
+  .prefix('/api')
