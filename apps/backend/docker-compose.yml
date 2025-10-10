@@ -1,42 +1,30 @@
-version: '3.8'
-
 services:
   # MySQL
   mysql:
     image: mysql:8.0
     container_name: mysql_boustify_dev
-    env_file: .env
     environment:
-      MYSQL_ROOT_PASSWORD: ${MYSQL_ROOT_PASSWORD}
-      MYSQL_DATABASE: ${DB_DATABASE}
-      MYSQL_USER: ${DB_USER}
-      MYSQL_PASSWORD: ${DB_PASSWORD}
+      MYSQL_ROOT_PASSWORD: dVosYSOYmmMwKkNa
+      MYSQL_DATABASE: boustify_dev
+      MYSQL_USER: SlyCat_dev
+      MYSQL_PASSWORD: nXVJU4QQdl9MPwRX
     ports:
       - "3306:3306"  # Port MySQL (hôte:conteneur)
     volumes:
       - mysql_data:/var/lib/mysql
-      # - ./mysql/init.sql:/docker-entrypoint-initdb.d/init.sql
     restart: unless-stopped
-    healthcheck:
-      test: ["CMD", "mysqladmin", "ping", "-h", "localhost"]
-      interval: 10s
-      timeout: 5s
-      retries: 5
 
   # phpMyAdmin
   phpmyadmin:
     image: phpmyadmin/phpmyadmin:latest
     container_name: phpmyadmin_boustify_dev
-    env_file: .env
     depends_on:
       - mysql
     environment:
       PMA_HOST: mysql
       PMA_PORT: 3306
-      PMA_USER: root
-      PMA_PASSWORD: rootpasswordpma!
     ports:
-      - "8080:80"  # Accès à phpMyAdmin sur http://localhost:8080
+      - "8888:80"  # Accès à phpMyAdmin sur http://localhost:8888
     restart: unless-stopped
 
 # Volumes pour persister les données MySQL
